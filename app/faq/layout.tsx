@@ -1,0 +1,1 @@
+import type { Metadata } from "next"; export const metadata:Metadata={title:"FAQ",description:"Answers to common questions before visiting FORGE.",alternates:{canonical:"/faq"},openGraph:{title:"FAQ",description:"Answers to common questions before visiting FORGE.",url:"/faq"}}; export default function Layout({children}:{children:React.ReactNode}){return children}

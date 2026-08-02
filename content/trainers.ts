@@ -1,0 +1,5 @@
+import type { Trainer } from "@/types";
+export const trainers: Trainer[] = [
+  { id:"coach-one", slug:"coach-one", name:"[COACH NAME ONE]", role:"Strength Coach — placeholder", shortBiography:"Placeholder profile pending the coach’s approved biography.", fullBiography:"This biography is placeholder content and must be replaced with information approved by the coach and FORGE.", specialties:["Strength fundamentals","Barbell coaching"], credentials:["[CREDENTIALS TO BE VERIFIED]"], classIds:["strength-foundations","forge-strength"], photo:"/images/trainer-one.svg", socialLinks:{}, active:true, placeholder:true },
+  { id:"coach-two", slug:"coach-two", name:"[COACH NAME TWO]", role:"Conditioning Coach — placeholder", shortBiography:"Placeholder profile pending the coach’s approved biography.", fullBiography:"This biography is placeholder content and must be replaced with information approved by the coach and FORGE.", specialties:["Conditioning","Mobility"], credentials:["[CREDENTIALS TO BE VERIFIED]"], classIds:["engine","mobility-recovery"], photo:"/images/trainer-two.svg", socialLinks:{}, active:true, placeholder:true },
+];

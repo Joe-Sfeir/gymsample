@@ -1,0 +1,2 @@
+"use client";
+export default function ErrorPage({ reset }: { error: Error & { digest?: string }; reset: () => void }) { return <main className="section"><div className="container"><p className="eyebrow">Error</p><h1 className="text-5xl font-black uppercase">Something went wrong.</h1><p className="my-6 text-muted">The page could not be loaded. No form data was submitted.</p><button className="button button-accent" onClick={reset}>Try again</button></div></main> }

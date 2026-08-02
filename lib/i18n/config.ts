@@ -1,0 +1,1 @@
+import type { Locale } from "@/types"; export const locales:Locale[]=["en","ar","fr"]; export const defaultLocale:Locale="en"; export const localeDirection=(locale:Locale):"ltr"|"rtl"=>locale==="ar"?"rtl":"ltr"; export const validationMessages={en:{required:"This field is required."},ar:{required:"هذا الحقل مطلوب."},fr:{required:"Ce champ est obligatoire."}} as const;

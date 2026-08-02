@@ -1,0 +1,11 @@
+// Optional reference schema only. Prisma is not installed and no migration is required.
+generator client { provider = "prisma-client-js" }
+datasource db { provider = "postgresql" url = env("DATABASE_URL") }
+model Trainer { id String @id @default(cuid()) name String classes Class[] sessions ScheduledSession[] }
+model Class { id String @id @default(cuid()) slug String @unique name String trainers Trainer[] sessions ScheduledSession[] }
+model ScheduledSession { id String @id @default(cuid()) startsAt DateTime endsAt DateTime capacity Int status String classId String class Class @relation(fields:[classId],references:[id]) trainerId String trainer Trainer @relation(fields:[trainerId],references:[id]) waitlist Waitlist[] }
+model MembershipPlan { id String @id @default(cuid()) name String monthlyPrice Decimal? active Boolean @default(true) }
+model TrialBooking { id String @id @default(cuid()) fullName String phone String email String createdAt DateTime @default(now()) }
+model Capacity { id String @id @default(cuid()) sessionId String @unique booked Int @default(0) }
+model Closure { id String @id @default(cuid()) startsAt DateTime endsAt DateTime reason String? }
+model Waitlist { id String @id @default(cuid()) contact String sessionId String session ScheduledSession @relation(fields:[sessionId],references:[id]) createdAt DateTime @default(now()) }

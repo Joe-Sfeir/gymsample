@@ -1,0 +1,2 @@
+export function formatSessionDate(date:string,locale="en-LB",timeZone="Asia/Beirut"){return new Intl.DateTimeFormat(locale,{weekday:"short",month:"short",day:"numeric",timeZone}).format(new Date(date+"T12:00:00Z"))}
+export function formatTime(time:string,locale="en-LB"){const [hour,minute]=time.split(":").map(Number); return new Intl.DateTimeFormat(locale,{hour:"numeric",minute:"2-digit"}).format(new Date(2020,0,1,hour,minute))}
