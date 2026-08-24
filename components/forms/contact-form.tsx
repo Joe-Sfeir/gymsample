@@ -20,7 +20,7 @@ export function ContactForm() {
       return;
     }
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch("/samples/gym/api/contact", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(parsed.data),

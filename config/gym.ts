@@ -29,6 +29,8 @@ export const gymConfig = {
     text: "Spline concept demonstration · FORGE is a fictional training brand",
   },
   cookies: { storageKey: "forge-cookie-preferences", version: 1 },
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
+  siteUrl:
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    "https://spline.e19company.com/samples/gym",
   mockDataMode: process.env.MOCK_DATA_MODE !== "false",
 } as const;

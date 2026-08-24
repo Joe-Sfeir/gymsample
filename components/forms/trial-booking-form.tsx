@@ -29,7 +29,7 @@ export function TrialBookingForm() {
       return;
     }
     try {
-      const response = await fetch("/api/trial-bookings", {
+      const response = await fetch("/samples/gym/api/trial-bookings", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(checked.data),

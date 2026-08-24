@@ -15,7 +15,7 @@ export const facilities: Facility[] = [
     ],
     accessibilityNotes:
       "Step-free concept layout with 1.2 m circulation paths; shown for demonstration, not as a surveyed facility.",
-    image: "/images/forge-hero.webp",
+    image: "/samples/gym/images/forge-hero.webp",
     svgRegionId: "zone-strength",
     placeholder: true,
   },
@@ -28,7 +28,7 @@ export const facilities: Facility[] = [
     equipment: ["Rowers", "Air bikes", "Sleds", "Medicine balls"],
     accessibilityNotes:
       "Transfer space and equipment access are illustrative and require verification in any real venue.",
-    image: "/images/forge-hero.webp",
+    image: "/samples/gym/images/forge-hero.webp",
     svgRegionId: "zone-conditioning",
     placeholder: true,
   },
@@ -41,7 +41,7 @@ export const facilities: Facility[] = [
     equipment: ["Mats", "Bands", "Foam rollers", "Low boxes"],
     accessibilityNotes:
       "The concept keeps this zone beside the entrance with a clear path and movable equipment.",
-    image: "/images/forge-hero-mobile.webp",
+    image: "/samples/gym/images/forge-hero-mobile.webp",
     svgRegionId: "zone-recovery",
     placeholder: true,
   },
@@ -103,7 +103,7 @@ export const trainingWeek: TrainingDay[] = days.map((day, index) => ({
   capacityState: index === 2 ? "Nearly full" : "Available",
   startTimes: index > 4 ? ["09:00"] : ["07:00", "18:00"],
   backgroundImage:
-    index % 2 ? "/images/forge-hero.webp" : "/images/forge-hero-mobile.webp",
+    index % 2 ? "/samples/gym/images/forge-hero.webp" : "/samples/gym/images/forge-hero-mobile.webp",
   shortDescription:
     "An illustrative day in the fictional FORGE timetable. Filters and states are fully interactive; availability is not live.",
   mock: true,

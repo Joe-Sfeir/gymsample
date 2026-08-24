@@ -1,1 +1,1 @@
-import type { MetadataRoute } from "next"; import { gymConfig } from "@/config/gym"; export default function robots():MetadataRoute.Robots{return{rules:{userAgent:"*",allow:"/",disallow:"/api/"},sitemap:gymConfig.siteUrl+"/sitemap.xml"}}
+import type { MetadataRoute } from "next"; import { gymConfig } from "@/config/gym"; export default function robots():MetadataRoute.Robots{return{rules:{userAgent:"*",allow:"/",disallow:"/samples/gym/api/"},sitemap:gymConfig.siteUrl+"/sitemap.xml"}}
