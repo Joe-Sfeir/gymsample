@@ -1,1 +1,14 @@
-import type { Metadata } from "next"; export const metadata:Metadata={title:"Memberships",description:"Compare placeholder FORGE membership structures and access.",alternates:{canonical:"/memberships"},openGraph:{title:"Memberships",description:"Compare placeholder FORGE membership structures and access.",url:"/memberships"}}; export default function Layout({children}:{children:React.ReactNode}){return children}
+import type { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Memberships",
+  description: "Compare illustrative FORGE membership structures and access.",
+  alternates: { canonical: "/memberships" },
+  openGraph: {
+    title: "Memberships",
+    description: "Compare illustrative FORGE membership structures and access.",
+    url: "/memberships",
+  },
+};
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return children;
+}

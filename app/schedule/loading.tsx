@@ -1,1 +1,8 @@
-export default function Loading(){return <main className="container py-24" aria-busy="true"><p className="eyebrow">Loading schedule</p><div className="mt-8 h-32 animate-pulse bg-surface motion-reduce:animate-none" /></main>}
+export default function Loading() {
+  return (
+    <main className="container py-24" aria-busy="true">
+      <p className="eyebrow">Loading schedule</p>
+      <div className="mt-8 h-32 animate-pulse bg-surface motion-reduce:animate-none" />
+    </main>
+  );
+}

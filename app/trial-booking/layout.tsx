@@ -1,1 +1,14 @@
-import type { Metadata } from "next"; export const metadata:Metadata={title:"Book a Trial",description:"Request a trial session and movement assessment at FORGE.",alternates:{canonical:"/trial-booking"},openGraph:{title:"Book a Trial",description:"Request a trial session and movement assessment at FORGE.",url:"/trial-booking"}}; export default function Layout({children}:{children:React.ReactNode}){return children}
+import type { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Book a Trial",
+  description: "Request a trial session and movement assessment at FORGE.",
+  alternates: { canonical: "/trial-booking" },
+  openGraph: {
+    title: "Book a Trial",
+    description: "Request a trial session and movement assessment at FORGE.",
+    url: "/trial-booking",
+  },
+};
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return children;
+}

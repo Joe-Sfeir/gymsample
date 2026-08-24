@@ -1,3 +1,148 @@
 "use client";
-import Link from "next/link"; import { useMemo,useState } from "react"; import type { GymClass,ScheduledSession,Trainer } from "@/types"; import { emptyFilters,filterSessions,type ScheduleFilters } from "@/lib/schedule/filter"; import { formatSessionDate,formatTime } from "@/lib/dates/format";
-export function ScheduleBrowser({sessions,classes,trainers}:{sessions:ScheduledSession[];classes:GymClass[];trainers:Trainer[]}){const [filters,setFilters]=useState<ScheduleFilters>(emptyFilters); const result=useMemo(()=>filterSessions(sessions,classes,trainers,filters),[sessions,classes,trainers,filters]); const set=(key:keyof ScheduleFilters,value:string)=>setFilters(old=>({...old,[key]:value})); const controls:{key:keyof ScheduleFilters;label:string;options:string[][]}[]=[{key:"day",label:"Day",options:[...new Set(sessions.map(s=>s.date))].map(v=>[v,formatSessionDate(v)])},{key:"classId",label:"Class",options:classes.map(c=>[c.id,c.name])},{key:"trainerId",label:"Trainer",options:trainers.map(t=>[t.id,t.name])},{key:"intensity",label:"Intensity",options:["Low","Moderate","High"].map(v=>[v,v])},{key:"level",label:"Level",options:["Beginner","Intermediate","Advanced","All levels"].map(v=>[v,v])}]; return <><div className="grid gap-4 border-y-2 border-border py-6 sm:grid-cols-2 lg:grid-cols-5">{controls.map(control=><label className="text-sm font-bold" key={control.key}>{control.label}<select className="mt-2 min-h-12 w-full border-2 border-border bg-background px-3" value={filters[control.key]} onChange={e=>set(control.key,e.target.value)}><option value="">All</option>{control.options.map(([value,label])=><option value={value} key={value}>{label}</option>)}</select></label>)}</div><button className="mt-5 underline" onClick={()=>setFilters(emptyFilters)}>Clear all filters</button><p className="mt-5 text-sm text-muted" role="status">{result.length} sample sessions shown</p>{result.length===0?<div className="my-12 border-2 border-border p-8"><h2 className="text-2xl font-black">No sample sessions match.</h2><p className="mt-3 text-muted">Reset the filters or contact FORGE about another time.</p><button className="button mt-5" onClick={()=>setFilters(emptyFilters)}>Reset filters</button></div>:<div className="mt-8 grid gap-4">{result.map(session=>{const item=classes.find(c=>c.id===session.classId)!; const coach=trainers.find(t=>t.id===session.trainerId); return <article className="grid gap-4 border-l-4 border-accent bg-surface p-5 md:grid-cols-[1fr_1fr_auto] md:items-center" key={session.id}><div><p className="eyebrow">{formatSessionDate(session.date)} · {formatTime(session.startTime)}–{formatTime(session.endTime)}</p><h2 className="mt-2 text-2xl font-black uppercase"><Link href={"/classes/"+item.slug}>{item.name}</Link></h2></div><p className="text-sm text-muted">{coach?.name} · {item.intensity} · {item.experienceLevel}<br/>{session.status} — sample, not live</p><Link className="button" href={"/trial-booking?class="+item.slug}>Trial</Link></article>})}</div>}</>}
+
+import Link from "next/link";
+import { useMemo, useState } from "react";
+import type { GymClass, ScheduledSession, Trainer } from "@/types";
+import {
+  emptyFilters,
+  filterSessions,
+  type ScheduleFilters,
+} from "@/lib/schedule/filter";
+import { formatSessionDate, formatTime } from "@/lib/dates/format";
+
+export function ScheduleBrowser({
+  sessions,
+  classes,
+  trainers,
+}: {
+  sessions: ScheduledSession[];
+  classes: GymClass[];
+  trainers: Trainer[];
+}) {
+  const [filters, setFilters] = useState<ScheduleFilters>(emptyFilters);
+  const result = useMemo(
+    () => filterSessions(sessions, classes, trainers, filters),
+    [sessions, classes, trainers, filters],
+  );
+  const set = (key: keyof ScheduleFilters, value: string) =>
+    setFilters((old) => ({ ...old, [key]: value }));
+  const controls: {
+    key: keyof ScheduleFilters;
+    label: string;
+    options: string[][];
+  }[] = [
+    {
+      key: "day",
+      label: "Day",
+      options: [...new Set(sessions.map((s) => s.date))].map((v) => [
+        v,
+        formatSessionDate(v),
+      ]),
+    },
+    {
+      key: "classId",
+      label: "Class",
+      options: classes.map((c) => [c.id, c.name]),
+    },
+    {
+      key: "trainerId",
+      label: "Trainer",
+      options: trainers.map((t) => [t.id, t.name]),
+    },
+    {
+      key: "intensity",
+      label: "Intensity",
+      options: ["Low", "Moderate", "High"].map((v) => [v, v]),
+    },
+    {
+      key: "level",
+      label: "Level",
+      options: ["Beginner", "Intermediate", "Advanced", "All levels"].map(
+        (v) => [v, v],
+      ),
+    },
+  ];
+  return (
+    <>
+      <div className="grid gap-4 border-y-2 border-border py-6 sm:grid-cols-2 lg:grid-cols-5">
+        {controls.map((control) => (
+          <label className="text-sm font-bold" key={control.key}>
+            {control.label}
+            <select
+              className="mt-2 min-h-12 w-full border-2 border-border bg-background px-3"
+              value={filters[control.key]}
+              onChange={(e) => set(control.key, e.target.value)}
+            >
+              <option value="">All</option>
+              {control.options.map(([value, label]) => (
+                <option value={value} key={value}>
+                  {label}
+                </option>
+              ))}
+            </select>
+          </label>
+        ))}
+      </div>
+      <button
+        className="mt-5 underline"
+        onClick={() => setFilters(emptyFilters)}
+      >
+        Clear all filters
+      </button>
+      <p className="mt-5 text-sm text-muted" role="status">
+        {result.length} demonstration sessions shown
+      </p>
+      {result.length === 0 ? (
+        <div className="my-12 border-2 border-border p-8">
+          <h2 className="text-2xl font-black">
+            No demonstration sessions match.
+          </h2>
+          <p className="mt-3 text-muted">
+            Reset the filters or contact Spline about adapting this flow.
+          </p>
+          <button
+            className="button mt-5"
+            onClick={() => setFilters(emptyFilters)}
+          >
+            Reset filters
+          </button>
+        </div>
+      ) : (
+        <div className="mt-8 grid gap-4">
+          {result.map((session) => {
+            const item = classes.find((c) => c.id === session.classId)!;
+            const coach = trainers.find((t) => t.id === session.trainerId);
+            return (
+              <article
+                className="grid gap-4 border-l-4 border-accent bg-surface p-5 md:grid-cols-[1fr_1fr_auto] md:items-center"
+                key={session.id}
+              >
+                <div>
+                  <p className="eyebrow">
+                    {formatSessionDate(session.date)} ·{" "}
+                    {formatTime(session.startTime)}–
+                    {formatTime(session.endTime)}
+                  </p>
+                  <h2 className="mt-2 text-2xl font-black uppercase">
+                    <Link href={`/classes/${item.slug}`}>{item.name}</Link>
+                  </h2>
+                </div>
+                <p className="text-sm text-muted">
+                  {coach?.name} · {item.intensity} · {item.experienceLevel}
+                  <br />
+                  {session.status} · illustrative, not live
+                </p>
+                <Link
+                  className="button"
+                  href={`/trial-booking?class=${item.slug}`}
+                >
+                  Try this class
+                </Link>
+              </article>
+            );
+          })}
+        </div>
+      )}
+    </>
+  );
+}

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Barlow, Barlow_Condensed } from "next/font/google";
 import "@/app/globals.css";
 import { SiteHeader } from "@/components/navigation/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
@@ -6,6 +7,9 @@ import { gymConfig } from "@/config/gym";
 import { CookieConsent } from "@/components/consent/cookie-consent";
 import { LocalBusinessJsonLd } from "@/components/seo/json-ld";
 import { MotionSystem } from "@/components/motion/motion-system";
+
+const bodyFont = Barlow({ subsets: ["latin"], weight: ["400", "600", "700"], variable: "--font-body" });
+const displayFont = Barlow_Condensed({ subsets: ["latin"], weight: ["700", "800", "900"], variable: "--font-display" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(gymConfig.siteUrl),
@@ -23,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" dir="ltr">
-      <body><LocalBusinessJsonLd /><MotionSystem /><SiteHeader /><div id="main-content" tabIndex={-1}>{children}</div><SiteFooter /><div id="cookie-preferences-root"><CookieConsent /></div></body>
+      <body className={`${bodyFont.variable} ${displayFont.variable}`}><LocalBusinessJsonLd /><MotionSystem /><SiteHeader /><div id="main-content" tabIndex={-1}>{children}</div><SiteFooter /><div id="cookie-preferences-root"><CookieConsent /></div></body>
     </html>
   );
 }

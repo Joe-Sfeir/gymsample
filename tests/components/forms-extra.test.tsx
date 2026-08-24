@@ -1,1 +1,48 @@
-import { describe,expect,it,vi } from "vitest"; import { render,screen } from "@testing-library/react"; import userEvent from "@testing-library/user-event"; import { ContactForm } from "@/components/forms/contact-form"; import { TrialBookingForm } from "@/components/forms/trial-booking-form"; describe("form states",()=>{it("shows contact validation errors",async()=>{const user=userEvent.setup();render(<ContactForm/>);await user.click(screen.getByRole("button",{name:"Send inquiry"}));expect(await screen.findByText("This field is required.")).toBeInTheDocument()});it("completes a mock trial booking",async()=>{vi.stubGlobal("fetch",vi.fn().mockResolvedValue({ok:true}));const user=userEvent.setup();render(<TrialBookingForm/>);await user.type(screen.getByLabelText("Full name"),"Maya Haddad");await user.type(screen.getByLabelText("Phone number"),"70123456");await user.type(screen.getByLabelText("Email"),"maya@example.com");await user.selectOptions(screen.getByLabelText("Preferred contact"),"email");await user.selectOptions(screen.getByLabelText("Experience level"),"Beginner");await user.selectOptions(screen.getByLabelText("Preferred class"),"engine");await user.type(screen.getByLabelText("Preferred day"),"Monday");await user.type(screen.getByLabelText("Preferred time"),"Evening");await user.type(screen.getByLabelText("Training goal"),"Build consistent strength");await user.click(screen.getByRole("checkbox",{name:/using these details to respond/}));await user.click(screen.getByRole("button",{name:"Request a trial"}));expect(await screen.findByText(/Trial request received/)).toBeInTheDocument()})})
+import { describe, expect, it, vi } from "vitest";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { ContactForm } from "@/components/forms/contact-form";
+import { TrialBookingForm } from "@/components/forms/trial-booking-form";
+describe("form states", () => {
+  it("shows contact validation errors", async () => {
+    const user = userEvent.setup();
+    render(<ContactForm />);
+    await user.click(screen.getByRole("button", { name: "Send inquiry" }));
+    expect(
+      await screen.findByText("This field is required."),
+    ).toBeInTheDocument();
+  });
+  it("completes a mock trial booking", async () => {
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: true }));
+    const user = userEvent.setup();
+    render(<TrialBookingForm />);
+    await user.type(screen.getByLabelText("Full name"), "Maya Haddad");
+    await user.type(screen.getByLabelText("Phone number"), "70123456");
+    await user.type(screen.getByLabelText("Email"), "maya@example.com");
+    await user.selectOptions(
+      screen.getByLabelText("Preferred contact"),
+      "email",
+    );
+    await user.selectOptions(
+      screen.getByLabelText("Experience level"),
+      "Beginner",
+    );
+    await user.selectOptions(
+      screen.getByLabelText("Preferred class"),
+      "engine",
+    );
+    await user.type(screen.getByLabelText("Preferred day"), "Monday");
+    await user.type(screen.getByLabelText("Preferred time"), "Evening");
+    await user.type(
+      screen.getByLabelText("Training goal"),
+      "Build consistent strength",
+    );
+    await user.click(
+      screen.getByRole("checkbox", { name: /demonstration request/ }),
+    );
+    await user.click(screen.getByRole("button", { name: "Request a trial" }));
+    expect(
+      await screen.findByText(/Demo receipt issued/),
+    ).toBeInTheDocument();
+  });
+});

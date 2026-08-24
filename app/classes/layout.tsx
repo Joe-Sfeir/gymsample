@@ -1,1 +1,14 @@
-import type { Metadata } from "next"; export const metadata:Metadata={title:"Classes",description:"Browse coached strength and conditioning classes.",alternates:{canonical:"/classes"},openGraph:{title:"Classes",description:"Browse coached strength and conditioning classes.",url:"/classes"}}; export default function Layout({children}:{children:React.ReactNode}){return children}
+import type { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Classes",
+  description: "Browse coached strength and conditioning classes.",
+  alternates: { canonical: "/classes" },
+  openGraph: {
+    title: "Classes",
+    description: "Browse coached strength and conditioning classes.",
+    url: "/classes",
+  },
+};
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return children;
+}

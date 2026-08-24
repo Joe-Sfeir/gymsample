@@ -1,4 +1,11 @@
 export const homepageContent = {
-  hero: { eyebrow:"Strength & conditioning in [AREA]", title:"Strength training without the circus.", body:"Coached sessions, clear standards, and room to do the work. Location and opening details are placeholders pending confirmation." },
-  philosophy: { title:"Training that earns its place.", body:"We focus on repeatable movement, useful strength, and conditioning with a purpose. Final programming language requires approval from FORGE." },
+  hero: {
+    eyebrow: "Fictional training club · Beirut",
+    title: "Strength training without the circus.",
+    body: "A complete concept experience for coached strength, conditioning, and recovery—built to demonstrate booking and membership journeys.",
+  },
+  philosophy: {
+    title: "Training that earns its place.",
+    body: "Every session has a job: build repeatable movement, useful strength, or the capacity to recover well. The programme is illustrative and belongs to this fictional Spline concept.",
+  },
 } as const;

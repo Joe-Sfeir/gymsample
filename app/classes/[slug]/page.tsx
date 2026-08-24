@@ -1,4 +1,97 @@
-import type { Metadata } from "next"; import { notFound } from "next/navigation"; import Link from "next/link"; import { classes, getClassBySlug, sampleSessions } from "@/content/classes"; import { trainers } from "@/content/trainers";
-export function generateStaticParams(){return classes.map(({slug})=>({slug}))}
-export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{const {slug}=await params;const item=getClassBySlug(slug);if(!item)return{};return{title:item.name,description:item.shortDescription,alternates:{canonical:"/classes/"+item.slug},openGraph:{title:item.name,description:item.shortDescription,url:"/classes/"+item.slug}}}
-export default async function ClassPage({params}:{params:Promise<{slug:string}>}){const {slug}=await params; const item=getClassBySlug(slug); if(!item)notFound(); const coaches=trainers.filter(t=>item.trainerIds.includes(t.id)); const sessions=sampleSessions.filter(s=>s.classId===item.id); return <main className="section"><div className="container"><nav aria-label="Breadcrumb" className="mb-8 text-sm text-muted"><ol className="flex gap-2"><li><Link href="/">Home</Link> /</li><li><Link href="/classes">Classes</Link> /</li><li aria-current="page">{item.name}</li></ol></nav><p className="eyebrow">{item.accentLabel} · Placeholder class data</p><h1 className="display mt-4">{item.name}</h1><p className="mt-8 max-w-3xl text-xl">{item.fullDescription}</p><dl className="my-12 grid gap-6 border-y-2 border-border py-8 sm:grid-cols-3"><div><dt className="eyebrow">Duration</dt><dd>{item.duration} minutes</dd></div><div><dt className="eyebrow">Intensity</dt><dd>{item.intensity}</dd></div><div><dt className="eyebrow">Level</dt><dd>{item.experienceLevel}</dd></div></dl><h2 className="text-2xl font-black uppercase">Equipment</h2><p className="mt-3 text-muted">{item.equipment.join(" · ")}</p><h2 className="mt-10 text-2xl font-black uppercase">Coach preview</h2><p className="mt-3 text-muted">{coaches.map(c=>c.name).join(" · ")}</p><h2 className="mt-10 text-2xl font-black uppercase">Upcoming sample sessions</h2><p className="mt-3 text-muted">{sessions.length?sessions.map(s=>`${s.date} at ${s.startTime}`).join(" · "):"No sample sessions listed."}</p><div className="mt-12 flex flex-wrap gap-4"><Link className="button button-accent" href={`/trial-booking?class=${item.slug}`}>Book a trial</Link><Link className="button" href="/classes">All classes</Link></div></div></main>}
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import Link from "next/link";
+import { classes, getClassBySlug, sampleSessions } from "@/content/classes";
+import { trainers } from "@/content/trainers";
+export function generateStaticParams() {
+  return classes.map(({ slug }) => ({ slug }));
+}
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const item = getClassBySlug(slug);
+  if (!item) return {};
+  return {
+    title: item.name,
+    description: item.shortDescription,
+    alternates: { canonical: "/classes/" + item.slug },
+    openGraph: {
+      title: item.name,
+      description: item.shortDescription,
+      url: "/classes/" + item.slug,
+    },
+  };
+}
+export default async function ClassPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const item = getClassBySlug(slug);
+  if (!item) notFound();
+  const coaches = trainers.filter((t) => item.trainerIds.includes(t.id));
+  const sessions = sampleSessions.filter((s) => s.classId === item.id);
+  return (
+    <main className="section">
+      <div className="container">
+        <nav aria-label="Breadcrumb" className="mb-8 text-sm text-muted">
+          <ol className="flex gap-2">
+            <li>
+              <Link href="/">Home</Link> /
+            </li>
+            <li>
+              <Link href="/classes">Classes</Link> /
+            </li>
+            <li aria-current="page">{item.name}</li>
+          </ol>
+        </nav>
+        <p className="eyebrow">{item.accentLabel} · Illustrative programme</p>
+        <h1 className="display mt-4">{item.name}</h1>
+        <p className="mt-8 max-w-3xl text-xl">{item.fullDescription}</p>
+        <dl className="my-12 grid gap-6 border-y-2 border-border py-8 sm:grid-cols-3">
+          <div>
+            <dt className="eyebrow">Duration</dt>
+            <dd>{item.duration} minutes</dd>
+          </div>
+          <div>
+            <dt className="eyebrow">Intensity</dt>
+            <dd>{item.intensity}</dd>
+          </div>
+          <div>
+            <dt className="eyebrow">Level</dt>
+            <dd>{item.experienceLevel}</dd>
+          </div>
+        </dl>
+        <h2 className="text-2xl font-black uppercase">Equipment</h2>
+        <p className="mt-3 text-muted">{item.equipment.join(" · ")}</p>
+        <h2 className="mt-10 text-2xl font-black uppercase">Coach preview</h2>
+        <p className="mt-3 text-muted">
+          {coaches.map((c) => c.name).join(" · ")}
+        </p>
+        <h2 className="mt-10 text-2xl font-black uppercase">
+          Upcoming demonstration sessions
+        </h2>
+        <p className="mt-3 text-muted">
+          {sessions.length
+            ? sessions.map((s) => `${s.date} at ${s.startTime}`).join(" · ")
+            : "No demonstration sessions listed."}
+        </p>
+        <div className="mt-12 flex flex-wrap gap-4">
+          <Link
+            className="button button-accent"
+            href={`/trial-booking?class=${item.slug}`}
+          >
+            Book a trial
+          </Link>
+          <Link className="button" href="/classes">
+            All classes
+          </Link>
+        </div>
+      </div>
+    </main>
+  );
+}
