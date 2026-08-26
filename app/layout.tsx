@@ -10,14 +10,24 @@ import { MotionSystem } from "@/components/motion/motion-system";
 
 const bodyFont = Barlow({ subsets: ["latin"], weight: ["400", "600", "700"], variable: "--font-body" });
 const displayFont = Barlow_Condensed({ subsets: ["latin"], weight: ["700", "800", "900"], variable: "--font-display" });
+const shareImage = `${gymConfig.siteUrl}/images/forge-hero.webp`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(gymConfig.siteUrl),
   title: { default: gymConfig.name, template: `%s | ${gymConfig.shortName}` },
   description: gymConfig.description,
   alternates: { canonical: "/" },
-  openGraph: { title: gymConfig.name, description: gymConfig.description, type: "website", locale: "en_LB", siteName: gymConfig.name },
-  twitter: { card: "summary_large_image", title: gymConfig.name, description: gymConfig.description },
+  icons: { icon: [{ url: `${gymConfig.siteUrl}/forge-icon.svg`, type: "image/svg+xml" }] },
+  openGraph: {
+    title: gymConfig.name,
+    description: gymConfig.description,
+    url: gymConfig.siteUrl,
+    type: "website",
+    locale: "en_LB",
+    siteName: gymConfig.name,
+    images: [{ url: shareImage, width: 1920, height: 1080, alt: "FORGE fictional training floor at first light" }],
+  },
+  twitter: { card: "summary_large_image", title: gymConfig.name, description: gymConfig.description, images: [shareImage] },
 };
 
 export default function RootLayout({
